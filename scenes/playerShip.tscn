@@ -1,12 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://ces1gdeou8lak"]
+[gd_scene load_steps=19 format=3 uid="uid://ces1gdeou8lak"]
 
 [ext_resource type="Script" uid="uid://dqq22boloaked" path="res://scripts/player.gd" id="1_o7q0d"]
 [ext_resource type="PackedScene" uid="uid://hjve64v4evke" path="res://scenes/bullet.tscn" id="2_2jk1u"]
 [ext_resource type="Texture2D" uid="uid://b6lbhh4kyesf3" path="res://assets/downShip.png" id="2_w42yn"]
-[ext_resource type="Texture2D" uid="uid://k5py3w2bv236" path="res://assets/idleShip.png" id="3_2jk1u"]
+[ext_resource type="Texture2D" uid="uid://bun2dvgs3d73x" path="res://assets/ship.png" id="4_w42yn"]
 [ext_resource type="Texture2D" uid="uid://c5pr40jolshco" path="res://assets/leftShip.png" id="4_x55be"]
 [ext_resource type="Texture2D" uid="uid://dat0nsctcxbmj" path="res://assets/rightShip.png" id="5_vfwgj"]
 [ext_resource type="Texture2D" uid="uid://colvw3xvrety4" path="res://assets/upShip.png" id="6_p8rq0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jk1u"]
+atlas = ExtResource("4_w42yn")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qhqgy"]
 animations = [{
@@ -20,7 +24,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_2jk1u")
+"texture": SubResource("AtlasTexture_2jk1u")
 }],
 "loop": true,
 "name": &"idle",
@@ -52,41 +56,94 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o7q0d"]
-size = Vector2(6.5, 42.25)
+size = Vector2(31, 38)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w42yn"]
-height = 36.0
+radius = 8.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2jk1u"]
-size = Vector2(42, 9)
+size = Vector2(3, 8)
 
-[node name="playerShip" type="CharacterBody2D"]
-motion_mode = 1
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w42yn"]
+size = Vector2(3, 15)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2jk1u"]
+radius = 2.828427
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x55be"]
+size = Vector2(9.16705, 22.012756)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vfwgj"]
+size = Vector2(9.429462, 20.247831)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8rq0"]
+size = Vector2(20, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dm14a"]
+size = Vector2(19, 6)
+
+[node name="playerShip" type="RigidBody2D"]
+gravity_scale = 0.0
 script = ExtResource("1_o7q0d")
 bulletScene = ExtResource("2_2jk1u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, 0)
+rotation = 1.5707964
 sprite_frames = SubResource("SpriteFrames_qhqgy")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(0, -31)
+position = Vector2(33, 0)
+
+[node name="bulletTimer" type="Timer" parent="."]
+wait_time = 0.11800000000000001
+one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -10.125)
+position = Vector2(-7.5, 0)
 shape = SubResource("RectangleShape2D_o7q0d")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -6)
+position = Vector2(16, 0)
 shape = SubResource("CapsuleShape2D_w42yn")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
-position = Vector2(-4, 9.5)
+position = Vector2(25.5, 0)
 shape = SubResource("RectangleShape2D_2jk1u")
 
-[node name="bulletTimer" type="Timer" parent="."]
-wait_time = 0.25
-one_shot = true
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(-30.5, -24.5)
+shape = SubResource("RectangleShape2D_w42yn")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
+position = Vector2(-30.5, 24.5)
+shape = SubResource("RectangleShape2D_w42yn")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
+position = Vector2(29, 0)
+shape = SubResource("CircleShape2D_2jk1u")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
+position = Vector2(-22, -9.000001)
+rotation = 2.6947885
+shape = SubResource("RectangleShape2D_x55be")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="."]
+position = Vector2(-23, 11)
+rotation = -2.6110125
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_vfwgj")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="."]
+position = Vector2(-22, -21)
+rotation = 0.65449846
+shape = SubResource("RectangleShape2D_p8rq0")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="."]
+position = Vector2(-22, 21)
+rotation = -0.6527531
+shape = SubResource("RectangleShape2D_dm14a")
 
 [connection signal="timeout" from="bulletTimer" to="." method="_on_bullet_timer_timeout"]

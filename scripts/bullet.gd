@@ -1,15 +1,16 @@
 extends Area2D
 
-var direction: Vector2
-var speed: float
+@export var speed := 900.0
+@export var lifetime := 1.5
+
+var direction := Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
+func _ready():
+	# Kill bullet after lifetime
+	await get_tree().create_timer(lifetime).timeout
+	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	global_position += direction*speed*delta
-	if global_position.y < 30:
-		queue_free()

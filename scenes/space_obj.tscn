@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://b7fhv8ue2glkr"]
+
+[ext_resource type="Script" uid="uid://bcc2mdu8ypds8" path="res://scripts/space_obj.gd" id="1_1jh7v"]
+[ext_resource type="Texture2D" uid="uid://cllkq4wjhyivp" path="res://assets/station.png" id="2_pv7fh"]
+[ext_resource type="Script" uid="uid://5gcke7wufx8x" path="res://scripts/gravityField.gd" id="3_pv7fh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7gtmc"]
+radius = 403.40674
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g58xd"]
+size = Vector2(96, 41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pv7fh"]
+size = Vector2(122, 85)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7gtmc"]
+size = Vector2(14, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjux1"]
+size = Vector2(11, 40)
+
+[node name="spaceObj" type="StaticBody2D"]
+script = ExtResource("1_1jh7v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_pv7fh")
+
+[node name="gravityField" type="Area2D" parent="."]
+script = ExtResource("3_pv7fh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gravityField"]
+shape = SubResource("CircleShape2D_7gtmc")
+
+[node name="goal" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="goal"]
+position = Vector2(1, -26)
+shape = SubResource("RectangleShape2D_g58xd")
+debug_color = Color(0.11976334, 0.63448524, 0.37868768, 0.41960785)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 19.5)
+shape = SubResource("RectangleShape2D_pv7fh")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-54, -43)
+shape = SubResource("RectangleShape2D_7gtmc")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(54.5, -43)
+shape = SubResource("RectangleShape2D_qjux1")

@@ -1,10 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://g1ovdum0lrxs"]
+[gd_scene load_steps=4 format=3 uid="uid://g1ovdum0lrxs"]
 
 [ext_resource type="Script" uid="uid://c801fx87l3emi" path="res://scripts/game.gd" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://ces1gdeou8lak" path="res://scenes/playerShip.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://b7fhv8ue2glkr" path="res://scenes/space_obj.tscn" id="3_lnu2h"]
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_uwrxv")
 
 [node name="playerShip" parent="." instance=ExtResource("2_yqjtg")]
 position = Vector2(317, 215)
+
+[node name="Camera2D" type="Camera2D" parent="playerShip"]
+
+[node name="spaceObj" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(1097, 235)
+
+[node name="spaceObj2" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(-455, 29)
+
+[node name="spaceObj3" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(370, -262)
+
+[node name="spaceObj4" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(303, 558)
